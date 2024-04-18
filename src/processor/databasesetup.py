@@ -66,7 +66,7 @@ class DatabaseManager:
             FOREIGN KEY (poem_id) REFERENCES poem(id))
         ''')
 
-    def insert_poem(self, dbname, data):
+    def insert_poem(self, data):
         """
         Inserts the provided data into the poem table in the database.
 
@@ -83,7 +83,7 @@ class DatabaseManager:
         conn.commit()
         conn.close()
 
-    def insert_translation(self, dbname, data):
+    def insert_translation(self, data):
         """
         Inserts the provided data into the translation table in the database.
 
@@ -94,8 +94,19 @@ class DatabaseManager:
         Returns:
         None
         """
-        conn = self.create_connection()
+        conn = self.create_connection(dbname)
         cursor = conn.cursor()
         cursor.executemany("INSERT INTO translation (language, poem_id, poem_translation, poemtitle_translation, context_translation, meaning_translation, antidote_translation) VALUES (?, ?, ?, ?, ?, ?, ?)", data)
         conn.commit()
         conn.close()
+
+    def select_poems(self, poem_id, translation_id):
+        """
+        Selects the poem with the given poem_id and translation_id from the database.
+        """
+        conn = self.create_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT poem, poemtitle, context, meaning, poemtitle_translation, context_translation, meaning_translation, audiopath FROM poem, translation WHERE translation.language = 'en' AND poem.id = translation.poem_id AND poem.id = ? AND translation.id = ?", (poem_id, translation_id))
+        poems = cursor.fetchall()
+        conn.close()
+        return poems

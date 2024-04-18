@@ -1,3 +1,7 @@
 torch
-sacrebleu
-bs4
+langchain-community
+faiss-cpu
+fastapi
+uvicorn
+sentence-transformers
+streamlit

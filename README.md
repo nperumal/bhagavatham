@@ -12,8 +12,12 @@
    - export PYTHONPATH=$PYTHONPATH:\<root\>/bhagavatam/src
 
 ### Jobs
-* Extract poems
-* Translate to English
-* Vectorize the translation
-* Create AAN index - FAISS index
-* Search for similarities
+#### Extract poems
+#### Translate to English
+#### Vectorize the transaction
+#### Create AAN index - FAISS index
+#### Start the FAISS search service 
+     uvicorn annservice:app --reload --port 8081
+#### Search for smililarities
+#### Start the streamlit app
+    streamlit run similaritysearchchat.py

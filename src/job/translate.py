@@ -2,7 +2,6 @@ import sqlite3
 from processor.translator import Translator
 from multiprocessing import Pool
 import time
-from config import DATABASE_NAME
 
 # Module to read poems from sqllite database called bhagavatam.db which is created by scrape.py and resided in ./data folder.
 # Function to read poems from the database and return the poems in a list of dictionaries.
@@ -70,7 +69,7 @@ def insert_translations_into_database(database, translated_poems):
     conn.close()
 
 if __name__ == "__main__":
-    database = DATABASE_NAME
+    database = 'src/data/bhagavatam.db'
     batch_size = 10
     total_poems = 330
     for epoch in range(total_poems // batch_size):
