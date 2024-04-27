@@ -24,3 +24,8 @@ async def startup_event():
 async def search(query: Query, service: BhagavathamSearchService = Depends(get_service)):
     results = service.search(query.text)
     return results
+
+@app.get("/poems")
+async def poems(service: BhagavathamSearchService = Depends(get_service)):
+    results = service.get_poems()
+    return results
