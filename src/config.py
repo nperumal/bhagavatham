@@ -8,3 +8,4 @@ MODEL_KWARGS = {'device':'cpu'}
 ENCODE_KWARGS = {'normalize_embeddings': False} 
 AUDIO_ROOT = 'https://bhagavatamanimutyalu.org/a_animutyalu_Telugu/'
 ANN_INDEX_SERVER = 'http://localhost:8081/'
+QA_MODEL='distilbert-base-uncased-distilled-squad'

@@ -110,3 +110,14 @@ class DatabaseManager:
         poems = cursor.fetchall()
         conn.close()
         return poems
+    
+    def get_poems(self):
+        """
+        Selects all the poems.
+        """
+        conn = self.create_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT poem, poemtitle, context, meaning, poemtitle_translation, context_translation, meaning_translation, audiopath FROM poem, translation WHERE translation.language = 'en' AND poem.id = translation.poem_id")
+        poems = cursor.fetchall()
+        conn.close()
+        return poems

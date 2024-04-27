@@ -3,7 +3,7 @@ from job.similaritysearch import query
 import pandas as pd
 from config import *
 import requests
-
+from PIL import Image
 
 st.set_page_config(page_title="చెప్పండి")
 
@@ -13,7 +13,7 @@ def generate_response(input_text):
         data = response.json()
         return data
     else:
-        return None
+        return None     
   
 with st.sidebar.title('భాగవతం'):
      st.write("బమ్మెర పోతానా")
@@ -28,16 +28,21 @@ with st.sidebar.title('భాగవతం'):
 వినుతగుణశీల! మాటలు వేయునేల?""")
 
 submitted = False
-prompt = st.chat_input("Say something")
+
+prompt = st.chat_input("Ask Bammera")
 if prompt:
    response = generate_response(prompt)
-   if response != None:
-        poem, poemtitle, context, meaning, poemtitle_translation, context_translation, meaning_translation, audio_path = response[0]
+   with st.chat_message("user"):
+        st.write(prompt)
 
-        st.audio(f"{AUDIO_ROOT}{audio_path}", format="audio/mpeg", loop=False)
+   if response != None:
+        poem, poemtitle, context, meaning, poemtitle_translation, context_translation, meaning_translation, audio_path, answer = response[0]
+        with st.chat_message("Bammara", avatar=Image.open('resources/saint.jpeg')):
+             st.write(answer)
 
         poem = poem.replace("\n", "  \n")
         with st.container(height=200):
+                st.audio(f"{AUDIO_ROOT}{audio_path}", format="audio/mpeg", loop=False)
                 st.write(poemtitle)
                 st.write("")
                 st.write(poem)
