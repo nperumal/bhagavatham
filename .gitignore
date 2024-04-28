@@ -127,6 +127,3 @@ dmypy.json
 # tokenizer
 IndicTransTokenizer/
 bhagavatam.db.original
-
-# steamlit pages
-pages/
